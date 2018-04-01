@@ -5,11 +5,11 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.google.common.net.InetAddresses;
+import com.google.common.primitives.UnsignedInts;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
-import static com.google.common.net.InetAddresses.*;
-import static com.google.common.primitives.UnsignedInts.*;
 
 /**
  * Given the dotted-quad representation of an IPv4 network address as a string, returns an
@@ -30,7 +30,7 @@ public class InternetAddressToNumber extends AbstractFunction implements UserDef
 
         final String ip = assertStringLiteral(values[0]).stringValue();
 
-        return literal(toLong(coerceToInteger(forString(ip))));
+        return literal(UnsignedInts.toLong(InetAddresses.coerceToInteger(InetAddresses.forString(ip))));
     }
 
     @Override

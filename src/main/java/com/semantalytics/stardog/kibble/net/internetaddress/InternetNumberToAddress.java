@@ -6,11 +6,8 @@ import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.google.common.net.InetAddresses;
-import com.google.common.primitives.Longs;
 import com.google.common.primitives.UnsignedLong;
 import org.openrdf.model.Value;
-
-import java.net.UnknownHostException;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
@@ -19,11 +16,6 @@ import static com.complexible.common.rdf.model.Values.literal;
  * string representation of the address as a nonbinary string in the connection character set
  */
 public class InternetNumberToAddress extends AbstractFunction implements UserDefinedFunction {
-
-    private static final long FIRST_OCTET_BASE = 16777216;
-    private static final long SECOND_OCTET_BASE = 65536;
-    private static final long THIRD_OCTET_BASE = 256;
-    private static final long FOURTH_OCTET_BASE = 1;
 
     public InternetNumberToAddress() {
         super(1, InternetAddressVocabulary.toAddress.stringValue());
@@ -39,16 +31,6 @@ public class InternetNumberToAddress extends AbstractFunction implements UserDef
         final long ipNumber = assertNumericLiteral(values[0]).longValue();
 
         return literal(InetAddresses.fromInteger(UnsignedLong.valueOf(ipNumber).intValue()).getHostAddress());
-
-
-
-        //TODO use Guava InetNumber
-//        final long firstOctet = ( ipNumber / FIRST_OCTET_BASE ) % 256;
-//        final long secondOctet = ( ipNumber / SECOND_OCTET_BASE ) % 256;
-//        final long thirdOctet = ( ipNumber / THIRD_OCTET_BASE ) % 256;
-//        final long fourthOctet = ( ipNumber / FOURTH_OCTET_BASE ) % 256;
-//
-//        return Values.literal(Joiner.on('.').join(firstOctet, secondOctet, thirdOctet, fourthOctet));
     }
 
     @Override
