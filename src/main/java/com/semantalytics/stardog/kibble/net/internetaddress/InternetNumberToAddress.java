@@ -1,16 +1,15 @@
 package com.semantalytics.stardog.kibble.net.internetaddress;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.google.common.base.Joiner;
+import com.google.common.net.InetAddresses;
 import com.google.common.primitives.Longs;
+import com.google.common.primitives.UnsignedLong;
 import org.openrdf.model.Value;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import static com.complexible.common.rdf.model.Values.literal;
@@ -27,7 +26,7 @@ public class InternetNumberToAddress extends AbstractFunction implements UserDef
     private static final long FOURTH_OCTET_BASE = 1;
 
     public InternetNumberToAddress() {
-        super(1, InternetAddressVocabulary.inetNumberToAddress.stringValue());
+        super(1, InternetAddressVocabulary.toAddress.stringValue());
     }
 
     private InternetNumberToAddress(InternetNumberToAddress internetNumberToAddress) {
@@ -39,11 +38,7 @@ public class InternetNumberToAddress extends AbstractFunction implements UserDef
 
         final long ipNumber = assertNumericLiteral(values[0]).longValue();
 
-        try {
-            return literal(InetAddress.getByAddress(Longs.toByteArray(ipNumber)).toString());
-        } catch(UnknownHostException e) {
-            throw new ExpressionEvaluationException(e);
-        }
+        return literal(InetAddresses.fromInteger(UnsignedLong.valueOf(ipNumber).intValue()).getHostAddress());
 
 
 
@@ -68,6 +63,6 @@ public class InternetNumberToAddress extends AbstractFunction implements UserDef
 
     @Override
     public String toString() {
-        return InternetAddressVocabulary.inetNumberToAddress.name();
+        return InternetAddressVocabulary.toAddress.name();
     }
 }

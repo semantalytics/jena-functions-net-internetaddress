@@ -5,14 +5,18 @@ import org.openrdf.model.IRI;
 
 public enum InternetAddressVocabulary {
 
-    inetAddressToNumber,
-    inetNumberToAddress;
+    toNumber,
+    toAddress;
 
-    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/net/";
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/net/internetaddress/";
     public final IRI iri;
 
     InternetAddressVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
+    }
+
+    public static String sparqlPrefix(String prefixName) {
+        return "PREFIX " + prefixName + ": <" + NAMESPACE + "> ";
     }
 
     public String stringValue() {
