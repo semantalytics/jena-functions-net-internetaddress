@@ -11,10 +11,6 @@ import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-/**
- * Given a numeric IPv4 network address in network byte order, returns the dotted-quad
- * string representation of the address as a nonbinary string in the connection character set
- */
 public class InternetNumberToAddress extends AbstractFunction implements UserDefinedFunction {
 
     public InternetNumberToAddress() {

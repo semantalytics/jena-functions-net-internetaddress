@@ -6,18 +6,21 @@ import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.google.common.net.InetAddresses;
-import com.google.common.primitives.UnsignedInts;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class InternetAddressToNumber extends AbstractFunction implements UserDefinedFunction {
+/**
+ * Given the dotted-quad representation of an IPv4 network address as a string, returns an
+ * integer that represents the numeric value of the address in network byte order (big endian)
+ */
+public class isLinkLocal extends AbstractFunction implements UserDefinedFunction {
 
-    public InternetAddressToNumber() {
-        super(1, InternetAddressVocabulary.toNumber.stringValue());
+    public isLinkLocal() {
+        super(1, InternetAddressVocabulary.isLinkLocal.stringValue());
     }
 
-    private InternetAddressToNumber(final InternetAddressToNumber internetAddressToNumber) {
+    private isLinkLocal(final isLinkLocal internetAddressToNumber) {
         super(internetAddressToNumber);
     }
 
@@ -26,12 +29,12 @@ public class InternetAddressToNumber extends AbstractFunction implements UserDef
 
         final String ip = assertStringLiteral(values[0]).stringValue();
 
-        return literal(UnsignedInts.toLong(InetAddresses.coerceToInteger(InetAddresses.forString(ip))));
+        return literal(InetAddresses.forString(ip).isLinkLocalAddress());
     }
 
     @Override
     public Function copy() {
-        return new InternetAddressToNumber(this);
+        return new isLinkLocal(this);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class InternetAddressToNumber extends AbstractFunction implements UserDef
 
     @Override
     public String toString() {
-        return InternetAddressVocabulary.toNumber.name();
+        return InternetAddressVocabulary.isLinkLocal.name();
     }
 
 }

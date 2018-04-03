@@ -20,7 +20,7 @@ import java.net.InetSocketAddress;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-        TestInternetAddressToNumber.class,
+        TestIsValidIp6.class,
         TestInternetNumberToAddress.class
 })
 

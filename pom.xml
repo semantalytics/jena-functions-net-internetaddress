@@ -51,6 +51,8 @@
         <slf4j.version>1.7.21</slf4j.version>
         <maven.version>3.3.9</maven.version>
         <guava.version>23.3-jre</guava.version>
+        <commons-validator.version>1.4.1</commons-validator.version>
+        <commons-net.version>3.6</commons-net.version>
     </properties>
 
     <dependencies>
@@ -77,6 +79,16 @@
             <artifactId>xml-apis</artifactId>
             <version>1.4.01</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>${commons-net.version}</version>
         </dependency>
     </dependencies>
 

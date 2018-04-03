@@ -6,7 +6,12 @@ import org.openrdf.model.IRI;
 public enum InternetAddressVocabulary {
 
     toNumber,
-    toAddress;
+    toAddress,
+    isIp4MappedAddress,
+    isLinkLocal,
+    isValid,
+    isValidIp6,
+    isValidIp4;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/net/internetaddress/";
     public final IRI iri;

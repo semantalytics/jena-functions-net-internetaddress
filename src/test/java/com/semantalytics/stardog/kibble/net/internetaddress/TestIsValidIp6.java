@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestInternetAddressToNumber extends AbstractStardogTest {
+public class TestIsValidIp6 extends AbstractStardogTest {
 
     @Test
     public void testOneArg() {

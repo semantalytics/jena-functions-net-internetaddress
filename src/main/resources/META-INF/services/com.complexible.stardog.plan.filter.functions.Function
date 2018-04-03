@@ -1,2 +1,2 @@
-com.semantalytics.stardog.kibble.net.internetaddress.InternetAddressToNumber
+com.semantalytics.stardog.kibble.net.internetaddress.IsValidIp6
 com.semantalytics.stardog.kibble.net.internetaddress.InternetNumberToAddress

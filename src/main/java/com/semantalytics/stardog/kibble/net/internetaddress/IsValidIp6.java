@@ -5,20 +5,19 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.google.common.net.InetAddresses;
-import com.google.common.primitives.UnsignedInts;
+import org.apache.commons.validator.routines.InetAddressValidator;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class InternetAddressToNumber extends AbstractFunction implements UserDefinedFunction {
+public class IsValidIp6 extends AbstractFunction implements UserDefinedFunction {
 
-    public InternetAddressToNumber() {
-        super(1, InternetAddressVocabulary.toNumber.stringValue());
+    public IsValidIp6() {
+        super(1, InternetAddressVocabulary.isValidIp6.stringValue());
     }
 
-    private InternetAddressToNumber(final InternetAddressToNumber internetAddressToNumber) {
-        super(internetAddressToNumber);
+    private IsValidIp6(final IsValidIp6 isValidIp6) {
+        super(isValidIp6);
     }
 
     @Override
@@ -26,12 +25,12 @@ public class InternetAddressToNumber extends AbstractFunction implements UserDef
 
         final String ip = assertStringLiteral(values[0]).stringValue();
 
-        return literal(UnsignedInts.toLong(InetAddresses.coerceToInteger(InetAddresses.forString(ip))));
+        return literal(InetAddressValidator.getInstance().isValidInet6Address(ip));
     }
 
     @Override
     public Function copy() {
-        return new InternetAddressToNumber(this);
+        return new IsValidIp6(this);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class InternetAddressToNumber extends AbstractFunction implements UserDef
 
     @Override
     public String toString() {
-        return InternetAddressVocabulary.toNumber.name();
+        return InternetAddressVocabulary.isValidIp6.name();
     }
 
 }
