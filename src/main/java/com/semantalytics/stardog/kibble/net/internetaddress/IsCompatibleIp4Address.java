@@ -10,13 +10,13 @@ import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class IsCompatibleIp4Addre3ss extends AbstractFunction implements UserDefinedFunction {
+public class IsCompatibleIp4Address extends AbstractFunction implements UserDefinedFunction {
 
-    public IsCompatibleIp4Addre3ss() {
+    public IsCompatibleIp4Address() {
         super(1, InternetAddressVocabulary.isIp4MappedAddress.stringValue());
     }
 
-    private IsCompatibleIp4Addre3ss(final IsCompatibleIp4Addre3ss internetAddressToNumber) {
+    private IsCompatibleIp4Address(final IsCompatibleIp4Address internetAddressToNumber) {
         super(internetAddressToNumber);
     }
 
@@ -30,7 +30,7 @@ public class IsCompatibleIp4Addre3ss extends AbstractFunction implements UserDef
 
     @Override
     public Function copy() {
-        return new IsCompatibleIp4Addre3ss(this);
+        return new IsCompatibleIp4Address(this);
     }
 
     @Override
