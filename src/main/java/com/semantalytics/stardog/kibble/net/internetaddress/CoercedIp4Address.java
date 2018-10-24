@@ -5,19 +5,18 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.google.common.net.InetAddresses;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 import static com.google.common.net.InetAddresses.*;
 
-public class GetEmbeddedIp4ClientAddress extends AbstractFunction implements UserDefinedFunction {
+public class CoercedIp4Address extends AbstractFunction implements UserDefinedFunction {
 
-    public GetEmbeddedIp4ClientAddress() {
+    public CoercedIp4Address() {
         super(1, InternetAddressVocabulary.isIp4MappedAddress.stringValue());
     }
 
-    private GetEmbeddedIp4ClientAddress(final GetEmbeddedIp4ClientAddress internetAddressToNumber) {
+    private CoercedIp4Address(final CoercedIp4Address internetAddressToNumber) {
         super(internetAddressToNumber);
     }
 
@@ -31,7 +30,7 @@ public class GetEmbeddedIp4ClientAddress extends AbstractFunction implements Use
 
     @Override
     public Function copy() {
-        return new GetEmbeddedIp4ClientAddress(this);
+        return new CoercedIp4Address(this);
     }
 
     @Override

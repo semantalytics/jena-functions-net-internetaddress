@@ -9,6 +9,7 @@ import com.google.common.net.InetAddresses;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
+import static com.google.common.net.InetAddresses.*;
 
 public class IsCompatibleIp4Address extends AbstractFunction implements UserDefinedFunction {
 
@@ -25,7 +26,7 @@ public class IsCompatibleIp4Address extends AbstractFunction implements UserDefi
 
         final String ip = assertStringLiteral(values[0]).stringValue();
 
-        return literal(InetAddresses.isMappedIPv4Address(ip));
+        return literal(isMappedIPv4Address(ip));
     }
 
     @Override

@@ -10,13 +10,17 @@ import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class getCoercedIp4Address extends AbstractFunction implements UserDefinedFunction {
+/**
+ * Given the dotted-quad representation of an IPv4 network address as a string, returns an
+ * integer that represents the numeric value of the address in network byte order (big endian)
+ */
+public class IsLinkLocal extends AbstractFunction implements UserDefinedFunction {
 
-    public getCoercedIp4Address() {
-        super(1, InternetAddressVocabulary.isIp4MappedAddress.stringValue());
+    public IsLinkLocal() {
+        super(1, InternetAddressVocabulary.isLinkLocal.stringValue());
     }
 
-    private getCoercedIp4Address(final getCoercedIp4Address internetAddressToNumber) {
+    private IsLinkLocal(final IsLinkLocal internetAddressToNumber) {
         super(internetAddressToNumber);
     }
 
@@ -25,12 +29,12 @@ public class getCoercedIp4Address extends AbstractFunction implements UserDefine
 
         final String ip = assertStringLiteral(values[0]).stringValue();
 
-        return literal(InetAddresses.isMappedIPv4Address(ip));
+        return literal(InetAddresses.forString(ip).isLinkLocalAddress());
     }
 
     @Override
     public Function copy() {
-        return new getCoercedIp4Address(this);
+        return new IsLinkLocal(this);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class getCoercedIp4Address extends AbstractFunction implements UserDefine
 
     @Override
     public String toString() {
-        return InternetAddressVocabulary.isIp4MappedAddress.name();
+        return InternetAddressVocabulary.isLinkLocal.name();
     }
 
 }
